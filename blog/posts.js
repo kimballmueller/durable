@@ -18,6 +18,28 @@
 
 const POSTS = [
   {
+    slug: "successful-deploy-test",
+    title: "This post is a successful test",
+    date: "September 25, 2026",
+    author: "Durable Team",
+    image: "https://picsum.photos/seed/dispatch-3/1200/700",
+    excerpt: "A short note to confirm the new publishing pipeline works end to end. If you're reading this, it did.",
+    content: [
+      "If you're reading this, the test worked.",
+      "This post was written, committed and deployed without anyone opening a CMS.",
+      "The code lives on GitHub, and the site is served by Vercel.",
+      "A new post is one small edit to a single file.",
+      "Once that edit is pushed, the live site updates on its own.",
+      "There's no build step, no plugin updates and no login screen.",
+      "That's what we were testing today: can we go from idea to live page in minutes?",
+      "The answer is yes.",
+      "It also means future posts can move as fast as the conversations that start them.",
+      "Expect more from The Dispatch soon: lessons from the room, not theory.",
+      "Until then, consider this our official hello world.",
+      "Test complete. Pipeline confirmed. Back to work."
+    ]
+  },
+  {
     slug: "why-owners-need-a-board",
     title: "Why every owner needs a board, even if they never build one",
     date: "September 12, 2026",
