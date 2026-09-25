@@ -7,12 +7,14 @@
 <meta name="description" content="Monthly facilitated peer groups for founders and CEOs. A curated room of people who get the weight of the work.">
 <style>
   :root{
-    --cream:#f7f3ec;
-    --cream-dark:#efe8db;
-    --ink:#1f1c17;
-    --ink-soft:#4a463d;
-    --accent:#a8632f;
-    --line:#e0d8c7;
+    --cream:#f6f4ec;
+    --cream-dark:#eae6d6;
+    --ink:#1c1f1a;
+    --ink-soft:#4a4f42;
+    --green:#2f5d3a;
+    --green-dark:#20402a;
+    --green-tint:#e7efe4;
+    --line:#dcd6c3;
     --max:1080px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
@@ -26,10 +28,15 @@
   .sans{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;}
   a{color:inherit;text-decoration:none}
   .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+  img{display:block;max-width:100%;height:auto}
+  .photo{
+    filter:sepia(0.25) hue-rotate(55deg) saturate(1.3) brightness(0.94) contrast(1.03);
+    border-radius:6px;
+  }
 
   header{
     position:sticky;top:0;z-index:10;
-    background:rgba(247,243,236,0.92);
+    background:rgba(246,244,236,0.92);
     backdrop-filter:blur(8px);
     border-bottom:1px solid var(--line);
   }
@@ -37,12 +44,12 @@
     display:flex;align-items:center;justify-content:space-between;
     height:72px;
   }
-  .logo{font-family:'Georgia',serif;font-size:1.3rem;font-weight:700;letter-spacing:0.02em}
+  .logo{font-family:'Georgia',serif;font-size:1.3rem;font-weight:700;letter-spacing:0.02em;color:var(--green-dark)}
   nav{display:flex;gap:32px;font-family:inherit;font-size:0.92rem;}
   nav a{color:var(--ink-soft)}
   .btn{
     display:inline-block;
-    background:var(--accent);
+    background:var(--green);
     color:#fff;
     padding:12px 28px;
     border-radius:2px;
@@ -50,20 +57,17 @@
     font-size:0.95rem;
     font-weight:600;
     letter-spacing:0.01em;
+    border:1px solid var(--green);
+    cursor:pointer;
     transition:opacity 0.15s;
   }
   .btn:hover{opacity:0.85}
-  .btn-outline{
-    background:transparent;
-    border:1px solid var(--ink);
-    color:var(--ink);
-  }
 
-  .hero{padding:96px 0 80px;text-align:center}
+  .hero{padding:88px 0 0;text-align:center}
   .hero .eyebrow{
     font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;
     text-transform:uppercase;letter-spacing:0.14em;font-size:0.78rem;
-    color:var(--accent);font-weight:700;margin-bottom:20px;
+    color:var(--green);font-weight:700;margin-bottom:20px;
   }
   .hero h1{
     font-size:clamp(2.2rem,5vw,3.6rem);
@@ -75,30 +79,40 @@
     max-width:560px;margin:0 auto 36px;
     color:var(--ink-soft);font-size:1.1rem;
   }
+  .hero-photo{
+    margin-top:56px;width:100%;height:min(52vw,440px);object-fit:cover;
+    border-radius:0;
+  }
 
   section{padding:80px 0;border-top:1px solid var(--line)}
   .section-label{
     font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;
     text-transform:uppercase;letter-spacing:0.14em;font-size:0.78rem;
-    color:var(--accent);font-weight:700;margin-bottom:16px;
+    color:var(--green);font-weight:700;margin-bottom:16px;
   }
   h2{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:400;max-width:680px;margin-bottom:20px}
   .lede{max-width:640px;color:var(--ink-soft);font-size:1.05rem}
+
+  .split{
+    display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;
+  }
+  .split.reverse .split-img{order:2}
+  .split-img img{width:100%;height:340px;object-fit:cover}
 
   .stats{
     display:grid;grid-template-columns:repeat(4,1fr);gap:24px;
     margin-top:48px;
   }
   .stat{
-    background:var(--cream-dark);border:1px solid var(--line);
+    background:var(--green-tint);border:1px solid var(--line);
     padding:28px 20px;text-align:center;border-radius:4px;
   }
-  .stat .num{font-size:2rem;font-weight:700;color:var(--accent);display:block;margin-bottom:6px}
+  .stat .num{font-size:2rem;font-weight:700;color:var(--green);display:block;margin-bottom:6px}
   .stat .label{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;font-size:0.85rem;color:var(--ink-soft)}
 
   blockquote{
-    margin-top:48px;padding:32px;background:var(--cream-dark);
-    border-left:3px solid var(--accent);border-radius:2px;
+    margin-top:48px;padding:32px;background:var(--green-tint);
+    border-left:3px solid var(--green);border-radius:2px;
     font-style:italic;font-size:1.15rem;max-width:680px;
   }
   blockquote cite{
@@ -111,43 +125,62 @@
   .pillar{padding:24px 16px;text-align:left}
   .pillar .n{
     font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;
-    font-size:0.78rem;color:var(--accent);font-weight:700;margin-bottom:10px;
+    font-size:0.78rem;color:var(--green);font-weight:700;margin-bottom:10px;
   }
   .pillar h3{font-size:1.15rem;font-weight:700;margin-bottom:8px}
   .pillar p{font-size:0.92rem;color:var(--ink-soft)}
 
-  .steps{counter-reset:step;margin-top:48px;display:grid;gap:0}
+  .steps{margin-top:48px;display:grid;gap:0}
   .step{
     display:flex;gap:24px;padding:24px 0;border-top:1px solid var(--line);
   }
   .step:first-child{border-top:none}
   .step .num{
     font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;
-    font-size:1.4rem;font-weight:700;color:var(--accent);min-width:44px;
+    font-size:1.4rem;font-weight:700;color:var(--green);min-width:44px;
   }
   .step h3{font-size:1.1rem;font-weight:700;margin-bottom:4px}
   .step p{font-size:0.95rem;color:var(--ink-soft)}
 
-  .pricing{
-    background:var(--ink);color:var(--cream);border-top:none;
-  }
-  .pricing .section-label{color:#d3a672}
+  .pricing{background:var(--green-dark);color:var(--cream);border-top:none}
+  .pricing .section-label{color:#a9d1b3}
   .pricing h2{color:#fff}
   .price-card{
-    margin-top:40px;background:#2a251d;border:1px solid #3d372c;
+    margin-top:40px;background:#284a30;border:1px solid #3a5f42;
     border-radius:8px;padding:40px;max-width:460px;
   }
   .price-card .amount{font-size:2.6rem;margin-bottom:4px}
-  .price-card .amount span{font-size:1rem;color:#b3ab99;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;}
+  .price-card .amount span{font-size:1rem;color:#bcd6c1;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;}
   .price-card .alt{
     font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;
-    font-size:0.9rem;color:#b3ab99;margin:8px 0 28px;
+    font-size:0.9rem;color:#bcd6c1;margin:8px 0 28px;
   }
-  .pricing .btn{margin-top:8px}
+  .pricing .btn{background:#fff;color:var(--green-dark);border-color:#fff}
+
+  /* Apply form */
+  .apply-section{background:var(--green-tint)}
+  .apply-form{max-width:480px;margin-top:40px;display:flex;flex-direction:column;gap:18px}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .apply-form label{display:flex;flex-direction:column;gap:6px;font-size:0.88rem;color:var(--ink-soft);font-weight:600}
+  .apply-form .opt{font-weight:400;color:#8b8776}
+  .apply-form input{
+    font-family:inherit;font-size:1rem;padding:14px 16px;
+    border:1px solid var(--line);border-radius:4px;background:#fff;color:var(--ink);
+  }
+  .apply-form input:focus{outline:2px solid var(--green);outline-offset:1px}
+  .apply-form .btn{margin-top:4px;width:100%;padding:16px;font-size:1rem}
+  .form-note{font-size:0.82rem;color:#8b8776;margin-top:-4px}
+  .form-success{
+    max-width:480px;margin-top:40px;background:#fff;border:1px solid var(--line);
+    border-radius:8px;padding:32px;
+  }
+  .form-success h3{font-size:1.2rem;margin-bottom:8px;color:var(--green-dark)}
+  .form-success p{color:var(--ink-soft);font-size:0.95rem}
 
   .closing{text-align:center;padding:100px 0}
   .closing h2{margin:0 auto 16px;max-width:600px}
   .closing p{max-width:480px;margin:0 auto 32px;color:var(--ink-soft)}
+  .closing-photo{width:100%;height:280px;object-fit:cover;margin-bottom:48px}
 
   footer{
     border-top:1px solid var(--line);padding:48px 0;
@@ -160,11 +193,14 @@
     nav{display:none}
     .stats{grid-template-columns:repeat(2,1fr)}
     .pillars{grid-template-columns:repeat(2,1fr)}
+    .split{grid-template-columns:1fr}
+    .split.reverse .split-img{order:0}
+    .form-row{grid-template-columns:1fr}
   }
   @media (max-width:520px){
     .stats{grid-template-columns:1fr 1fr}
     .pillars{grid-template-columns:1fr}
-    .hero{padding:64px 0 56px}
+    .hero{padding:64px 0 0}
     section{padding:56px 0}
   }
 </style>
@@ -192,13 +228,19 @@
     <p>Monthly, facilitated groups of 8–10 founders and CEOs working through the decisions no one else in the building can weigh in on.</p>
     <a href="#apply" class="btn sans">Apply to Join a Peer Group</a>
   </div>
+  <img class="hero-photo photo" src="https://picsum.photos/seed/durable-hero/1600/900" alt="Founders in a peer group session around a table">
 </section>
 
 <section>
-  <div class="wrap">
-    <div class="section-label sans">The Problem</div>
-    <h2>Leadership gets lonely at the level you're operating.</h2>
-    <p class="lede">Most owners are making six- and seven-figure calls without a board, without a partner who's seen it before, and without anyone in the room who isn't a direct report. The higher you climb, the fewer people can actually tell you the truth.</p>
+  <div class="wrap split">
+    <div>
+      <div class="section-label sans">The Problem</div>
+      <h2>Leadership gets lonely at the level you're operating.</h2>
+      <p class="lede">Most owners are making six- and seven-figure calls without a board, without a partner who's seen it before, and without anyone in the room who isn't a direct report. The higher you climb, the fewer people can actually tell you the truth.</p>
+    </div>
+    <div class="split-img">
+      <img class="photo" src="https://picsum.photos/seed/durable-problem/900/700" alt="Founder thinking through a hard decision">
+    </div>
   </div>
 </section>
 
@@ -221,10 +263,15 @@
 </section>
 
 <section>
-  <div class="wrap">
-    <div class="section-label sans">How It Works</div>
-    <h2>Support doesn't stop when the session ends.</h2>
-    <p class="lede">Members stay connected between sessions over a private group thread, come together annually for a retreat, and share dinners throughout the year. Each session centers two members at a time — "Center Stage" — so every problem gets real depth instead of a five-minute check-in.</p>
+  <div class="wrap split reverse">
+    <div>
+      <div class="section-label sans">How It Works</div>
+      <h2>Support doesn't stop when the session ends.</h2>
+      <p class="lede">Members stay connected between sessions over a private group thread, come together annually for a retreat, and share dinners throughout the year. Each session centers two members at a time — "Center Stage" — so every problem gets real depth instead of a five-minute check-in.</p>
+    </div>
+    <div class="split-img">
+      <img class="photo" src="https://picsum.photos/seed/durable-howitworks/900/700" alt="Group dinner between sessions">
+    </div>
   </div>
 </section>
 
@@ -262,7 +309,7 @@
   </div>
 </section>
 
-<section id="apply">
+<section>
   <div class="wrap">
     <div class="section-label sans">How to Join</div>
     <h2>Five steps to your first session.</h2>
@@ -298,13 +345,43 @@
     <div class="price-card">
       <div class="amount sans">$5,000<span> / year</span></div>
       <div class="alt">or $500/month + $500 one-time enrollment fee</div>
-      <a href="#" class="btn sans">Apply to Join a Peer Group</a>
+      <a href="#apply" class="btn sans">Apply to Join a Peer Group</a>
+    </div>
+  </div>
+</section>
+
+<section id="apply" class="apply-section">
+  <div class="wrap">
+    <div class="section-label sans">Apply Now</div>
+    <h2>Ready to find your room?</h2>
+    <p class="lede">Two fields. That's it. We'll follow up to schedule your discovery call.</p>
+
+    <form class="apply-form sans" id="applyForm">
+      <div class="form-row">
+        <label>Name
+          <input type="text" name="name" required placeholder="Your full name">
+        </label>
+        <label>Email
+          <input type="email" name="email" required placeholder="you@company.com">
+        </label>
+      </div>
+      <label>Company <span class="opt">(optional)</span>
+        <input type="text" name="company" placeholder="Business name">
+      </label>
+      <button type="submit" class="btn">Apply to Join a Peer Group</button>
+      <p class="form-note">No spam. No hard sell. Just a real conversation.</p>
+    </form>
+
+    <div class="form-success sans" id="formSuccess" hidden>
+      <h3>You're in the queue.</h3>
+      <p>Someone from our team will reach out within 1–2 business days to schedule your discovery call.</p>
     </div>
   </div>
 </section>
 
 <section class="closing">
   <div class="wrap">
+    <img class="closing-photo photo" src="https://picsum.photos/seed/durable-closing/1600/700" alt="Peer group gathered together">
     <div class="section-label sans">Seats Are Limited</div>
     <h2>Groups are small on purpose.</h2>
     <p>Every group is curated for fit — which means most cycles close before they open publicly.</p>
@@ -326,6 +403,16 @@
     </nav>
   </div>
 </footer>
+
+<script>
+  var form = document.getElementById('applyForm');
+  var success = document.getElementById('formSuccess');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    form.hidden = true;
+    success.hidden = false;
+  });
+</script>
 
 </body>
 </html>
