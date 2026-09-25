@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Dispatch — Durable</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FFFCF5;--beige:#E8E4D8;--ink:#0a0a0a;--ink-soft:#4A4A45;
+    --gold:#B8894A;--gold-light:#c8a96e;--forest:#1B2B24;--max:760px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter Tight',-apple-system,sans-serif;background:var(--cream);color:var(--ink);line-height:1.7}
+  .serif{font-family:'Playfair Display',serif}
+  .mono{font-family:'JetBrains Mono',monospace}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%;height:auto}
+  .photo{filter:sepia(0.18) saturate(1.15) brightness(0.96) contrast(1.04)}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 32px}
+
+  header{padding:28px 0;border-bottom:1px solid var(--beige)}
+  header .wrap{max-width:1160px;display:flex;align-items:center;justify-content:space-between}
+  .logo{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700}
+  nav{display:flex;gap:32px;font-size:0.86rem}
+  nav a{color:var(--ink-soft)}
+
+  .post-head{padding:70px 0 40px}
+  .back{display:inline-block;margin-bottom:32px;font-size:0.85rem;color:var(--gold);font-weight:600}
+  .date{font-size:0.78rem;color:var(--gold);letter-spacing:0.08em;margin-bottom:16px}
+  h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,2.9rem);font-weight:600;margin-bottom:20px;line-height:1.15}
+  .byline{font-size:0.9rem;color:var(--ink-soft);margin-bottom:40px}
+  .hero-img{width:100%;height:380px;object-fit:cover;border-radius:20px;margin-bottom:48px}
+
+  .post-body p{font-size:1.1rem;color:#2a2a26;margin-bottom:26px;max-width:680px}
+  .post-body p:first-of-type{font-family:'Playfair Display',serif;font-size:1.3rem;font-style:italic;color:var(--ink)}
+
+  footer{background:var(--forest);color:#c9d0c9;padding:48px 0;font-size:0.88rem;margin-top:60px}
+  footer .wrap{max-width:1160px}
+
+  #notFound{padding:100px 0;text-align:center}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a href="../" class="logo">Durable</a>
+    <nav>
+      <a href="../">Home</a>
+      <a href="../#apply">Peer Groups</a>
+      <a href="./">The Dispatch</a>
+    </nav>
+  </div>
+</header>
+
+<article class="post-head wrap" id="post" hidden>
+  <a href="./" class="back mono">&larr; Back to The Dispatch</a>
+  <div class="date mono" id="postDate"></div>
+  <h1 id="postTitle"></h1>
+  <div class="byline" id="postByline"></div>
+  <img class="hero-img photo" id="postImage" src="" alt="">
+  <div class="post-body" id="postBody"></div>
+</article>
+
+<div id="notFound" hidden>
+  <div class="wrap">
+    <h1 class="serif">Post not found</h1>
+    <p style="margin-top:16px"><a href="./" class="mono" style="color:var(--gold)">&larr; Back to The Dispatch</a></p>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">Durable — Salt Lake City, UT</div>
+</footer>
+
+<script src="posts.js"></script>
+<script>
+  var params = new URLSearchParams(window.location.search);
+  var slug = params.get('slug');
+  var post = POSTS.find(function(p){ return p.slug === slug; });
+
+  if (post) {
+    document.title = post.title + ' — The Dispatch';
+    document.getElementById('postDate').textContent = post.date;
+    document.getElementById('postTitle').textContent = post.title;
+    document.getElementById('postByline').textContent = 'By ' + post.author;
+    document.getElementById('postImage').src = post.image;
+    var body = document.getElementById('postBody');
+    post.content.forEach(function(paragraph){
+      var p = document.createElement('p');
+      p.textContent = paragraph;
+      body.appendChild(p);
+    });
+    document.getElementById('post').hidden = false;
+  } else {
+    document.getElementById('notFound').hidden = false;
+  }
+</script>
+
+</body>
+</html>

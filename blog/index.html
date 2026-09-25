@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Dispatch — Durable</title>
+<meta name="description" content="Notes on leadership, isolation, and building something worth handing off well.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Inter+Tight:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FFFCF5;--beige:#E8E4D8;--ink:#0a0a0a;--ink-soft:#4A4A45;
+    --gold:#B8894A;--gold-light:#c8a96e;--forest:#1B2B24;--max:1160px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter Tight',-apple-system,sans-serif;background:var(--cream);color:var(--ink);line-height:1.6}
+  .serif{font-family:'Playfair Display',serif}
+  .mono{font-family:'JetBrains Mono',monospace}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%;height:auto}
+  .photo{filter:sepia(0.18) saturate(1.15) brightness(0.96) contrast(1.04)}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 32px}
+
+  header{padding:28px 0;border-bottom:1px solid var(--beige)}
+  header .wrap{display:flex;align-items:center;justify-content:space-between}
+  .logo{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700}
+  nav{display:flex;gap:32px;font-size:0.86rem}
+  nav a{color:var(--ink-soft)}
+  nav a:hover{color:var(--gold)}
+
+  .page-head{padding:90px 0 60px}
+  .eyebrow{letter-spacing:0.16em;font-size:0.75rem;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:20px;display:block}
+  h1{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,5vw,3.4rem);font-weight:600;max-width:680px;margin-bottom:16px}
+  .page-head p{max-width:520px;color:var(--ink-soft);font-size:1.05rem}
+
+  .posts{padding:20px 0 100px;display:flex;flex-direction:column;gap:0}
+  .post-row{
+    display:grid;grid-template-columns:280px 1fr;gap:40px;align-items:center;
+    padding:40px 0;border-top:1px solid var(--beige);
+  }
+  .posts .post-row:last-child{border-bottom:1px solid var(--beige)}
+  .post-row img{width:100%;height:180px;object-fit:cover;border-radius:16px 4px 16px 4px}
+  .post-row .date{font-size:0.78rem;color:var(--gold);letter-spacing:0.06em;margin-bottom:10px}
+  .post-row h2{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:600;margin-bottom:10px}
+  .post-row p{color:var(--ink-soft);font-size:0.98rem;max-width:560px}
+  .post-row .read{display:inline-block;margin-top:14px;font-size:0.85rem;font-weight:600;color:var(--forest);border-bottom:1px solid var(--forest)}
+  .post-row:hover h2{color:var(--gold)}
+
+  footer{background:var(--forest);color:#c9d0c9;padding:48px 0;font-size:0.88rem}
+
+  @media (max-width:700px){
+    nav{display:none}
+    .post-row{grid-template-columns:1fr}
+    .post-row img{height:200px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a href="../" class="logo">Durable</a>
+    <nav>
+      <a href="../">Home</a>
+      <a href="../#apply">Peer Groups</a>
+      <a href="./">The Dispatch</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-head">
+  <div class="wrap">
+    <span class="eyebrow mono">The Dispatch</span>
+    <h1>Notes on leadership, isolation, and building something worth handing off.</h1>
+    <p>Short, honest writing from inside the peer groups — for owners who don't have time for fluff.</p>
+  </div>
+</section>
+
+<section class="posts">
+  <div class="wrap" id="postList"></div>
+</section>
+
+<footer>
+  <div class="wrap">Durable — Salt Lake City, UT</div>
+</footer>
+
+<script src="posts.js"></script>
+<script>
+  var list = document.getElementById('postList');
+  POSTS.slice().reverse().forEach(function(post){
+    var row = document.createElement('a');
+    row.className = 'post-row';
+    row.href = 'post.html?slug=' + encodeURIComponent(post.slug);
+    row.innerHTML =
+      '<img class="photo" src="' + post.image + '" alt="">' +
+      '<div>' +
+        '<div class="date mono">' + post.date + '</div>' +
+        '<h2>' + post.title + '</h2>' +
+        '<p>' + post.excerpt + '</p>' +
+        '<span class="read">Read the post &rarr;</span>' +
+      '</div>';
+    list.appendChild(row);
+  });
+</script>
+
+</body>
+</html>
