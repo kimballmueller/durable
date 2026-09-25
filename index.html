@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Peer Groups — Durable</title>
+<meta name="description" content="Monthly facilitated peer groups for founders and CEOs. A curated room of people who get the weight of the work.">
+<style>
+  :root{
+    --cream:#f7f3ec;
+    --cream-dark:#efe8db;
+    --ink:#1f1c17;
+    --ink-soft:#4a463d;
+    --accent:#a8632f;
+    --line:#e0d8c7;
+    --max:1080px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'Georgia',serif;
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .sans{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+
+  header{
+    position:sticky;top:0;z-index:10;
+    background:rgba(247,243,236,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  header .wrap{
+    display:flex;align-items:center;justify-content:space-between;
+    height:72px;
+  }
+  .logo{font-family:'Georgia',serif;font-size:1.3rem;font-weight:700;letter-spacing:0.02em}
+  nav{display:flex;gap:32px;font-family:inherit;font-size:0.92rem;}
+  nav a{color:var(--ink-soft)}
+  .btn{
+    display:inline-block;
+    background:var(--accent);
+    color:#fff;
+    padding:12px 28px;
+    border-radius:2px;
+    font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;
+    font-size:0.95rem;
+    font-weight:600;
+    letter-spacing:0.01em;
+    transition:opacity 0.15s;
+  }
+  .btn:hover{opacity:0.85}
+  .btn-outline{
+    background:transparent;
+    border:1px solid var(--ink);
+    color:var(--ink);
+  }
+
+  .hero{padding:96px 0 80px;text-align:center}
+  .hero .eyebrow{
+    font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;
+    text-transform:uppercase;letter-spacing:0.14em;font-size:0.78rem;
+    color:var(--accent);font-weight:700;margin-bottom:20px;
+  }
+  .hero h1{
+    font-size:clamp(2.2rem,5vw,3.6rem);
+    font-weight:400;
+    max-width:760px;margin:0 auto 24px;
+    letter-spacing:-0.01em;
+  }
+  .hero p{
+    max-width:560px;margin:0 auto 36px;
+    color:var(--ink-soft);font-size:1.1rem;
+  }
+
+  section{padding:80px 0;border-top:1px solid var(--line)}
+  .section-label{
+    font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;
+    text-transform:uppercase;letter-spacing:0.14em;font-size:0.78rem;
+    color:var(--accent);font-weight:700;margin-bottom:16px;
+  }
+  h2{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:400;max-width:680px;margin-bottom:20px}
+  .lede{max-width:640px;color:var(--ink-soft);font-size:1.05rem}
+
+  .stats{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:24px;
+    margin-top:48px;
+  }
+  .stat{
+    background:var(--cream-dark);border:1px solid var(--line);
+    padding:28px 20px;text-align:center;border-radius:4px;
+  }
+  .stat .num{font-size:2rem;font-weight:700;color:var(--accent);display:block;margin-bottom:6px}
+  .stat .label{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;font-size:0.85rem;color:var(--ink-soft)}
+
+  blockquote{
+    margin-top:48px;padding:32px;background:var(--cream-dark);
+    border-left:3px solid var(--accent);border-radius:2px;
+    font-style:italic;font-size:1.15rem;max-width:680px;
+  }
+  blockquote cite{
+    display:block;margin-top:16px;font-style:normal;
+    font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;
+    font-size:0.85rem;color:var(--ink-soft);font-weight:600;
+  }
+
+  .pillars{display:grid;grid-template-columns:repeat(5,1fr);gap:20px;margin-top:48px}
+  .pillar{padding:24px 16px;text-align:left}
+  .pillar .n{
+    font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;
+    font-size:0.78rem;color:var(--accent);font-weight:700;margin-bottom:10px;
+  }
+  .pillar h3{font-size:1.15rem;font-weight:700;margin-bottom:8px}
+  .pillar p{font-size:0.92rem;color:var(--ink-soft)}
+
+  .steps{counter-reset:step;margin-top:48px;display:grid;gap:0}
+  .step{
+    display:flex;gap:24px;padding:24px 0;border-top:1px solid var(--line);
+  }
+  .step:first-child{border-top:none}
+  .step .num{
+    font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;
+    font-size:1.4rem;font-weight:700;color:var(--accent);min-width:44px;
+  }
+  .step h3{font-size:1.1rem;font-weight:700;margin-bottom:4px}
+  .step p{font-size:0.95rem;color:var(--ink-soft)}
+
+  .pricing{
+    background:var(--ink);color:var(--cream);border-top:none;
+  }
+  .pricing .section-label{color:#d3a672}
+  .pricing h2{color:#fff}
+  .price-card{
+    margin-top:40px;background:#2a251d;border:1px solid #3d372c;
+    border-radius:8px;padding:40px;max-width:460px;
+  }
+  .price-card .amount{font-size:2.6rem;margin-bottom:4px}
+  .price-card .amount span{font-size:1rem;color:#b3ab99;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;}
+  .price-card .alt{
+    font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;
+    font-size:0.9rem;color:#b3ab99;margin:8px 0 28px;
+  }
+  .pricing .btn{margin-top:8px}
+
+  .closing{text-align:center;padding:100px 0}
+  .closing h2{margin:0 auto 16px;max-width:600px}
+  .closing p{max-width:480px;margin:0 auto 32px;color:var(--ink-soft)}
+
+  footer{
+    border-top:1px solid var(--line);padding:48px 0;
+    font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;
+    font-size:0.85rem;color:var(--ink-soft);
+  }
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+
+  @media (max-width:860px){
+    nav{display:none}
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .pillars{grid-template-columns:repeat(2,1fr)}
+  }
+  @media (max-width:520px){
+    .stats{grid-template-columns:1fr 1fr}
+    .pillars{grid-template-columns:1fr}
+    .hero{padding:64px 0 56px}
+    section{padding:56px 0}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="logo">Durable</div>
+    <nav class="sans">
+      <a href="#">Membership</a>
+      <a href="#">Peer Groups</a>
+      <a href="#">Events</a>
+      <a href="#">The Dispatch</a>
+      <a href="#">About</a>
+    </nav>
+    <a href="#apply" class="btn sans">Apply Now</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow sans">Peer Groups</div>
+    <h1>A board for the owners who never had one.</h1>
+    <p>Monthly, facilitated groups of 8–10 founders and CEOs working through the decisions no one else in the building can weigh in on.</p>
+    <a href="#apply" class="btn sans">Apply to Join a Peer Group</a>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-label sans">The Problem</div>
+    <h2>Leadership gets lonely at the level you're operating.</h2>
+    <p class="lede">Most owners are making six- and seven-figure calls without a board, without a partner who's seen it before, and without anyone in the room who isn't a direct report. The higher you climb, the fewer people can actually tell you the truth.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-label sans">What It Is</div>
+    <h2>A curated room of people who get the weight of the work.</h2>
+    <p class="lede">Every group is hand-matched for stage and industry fit, then facilitated by someone trained to keep the conversation honest — not comfortable.</p>
+    <div class="stats sans">
+      <div class="stat"><span class="num">8–10</span><span class="label">Members per group</span></div>
+      <div class="stat"><span class="num">Monthly</span><span class="label">Session cadence</span></div>
+      <div class="stat"><span class="num">2.5 hrs</span><span class="label">Per session</span></div>
+      <div class="stat"><span class="num">100%</span><span class="label">Confidential</span></div>
+    </div>
+    <blockquote>
+      "This group is the only room where I say the quiet part out loud. It's changed how I run the company."
+      <cite>Lydia S. Martinez — Founder &amp; CEO, Elle Marketing and Events</cite>
+    </blockquote>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-label sans">How It Works</div>
+    <h2>Support doesn't stop when the session ends.</h2>
+    <p class="lede">Members stay connected between sessions over a private group thread, come together annually for a retreat, and share dinners throughout the year. Each session centers two members at a time — "Center Stage" — so every problem gets real depth instead of a five-minute check-in.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-label sans">Five Pillars</div>
+    <h2>What every group is built on.</h2>
+    <div class="pillars">
+      <div class="pillar">
+        <div class="n sans">01</div>
+        <h3>Trust</h3>
+        <p>A room where what's said stays said.</p>
+      </div>
+      <div class="pillar">
+        <div class="n sans">02</div>
+        <h3>Accountability</h3>
+        <p>Commitments get tracked, not forgotten.</p>
+      </div>
+      <div class="pillar">
+        <div class="n sans">03</div>
+        <h3>Balance</h3>
+        <p>The business doesn't get to eat everything else.</p>
+      </div>
+      <div class="pillar">
+        <div class="n sans">04</div>
+        <h3>Energy</h3>
+        <p>Leadership fuel, not just leadership strategy.</p>
+      </div>
+      <div class="pillar">
+        <div class="n sans">05</div>
+        <h3>Stewardship</h3>
+        <p>Building something worth handing off well.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="apply">
+  <div class="wrap">
+    <div class="section-label sans">How to Join</div>
+    <h2>Five steps to your first session.</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="num sans">1</div>
+        <div><h3>Discovery call</h3><p>A short conversation to understand where you're at.</p></div>
+      </div>
+      <div class="step">
+        <div class="num sans">2</div>
+        <div><h3>Application</h3><p>Tell us about your business and what you need from the room.</p></div>
+      </div>
+      <div class="step">
+        <div class="num sans">3</div>
+        <div><h3>Guest sit-in</h3><p>Sit in on a live session before committing to anything.</p></div>
+      </div>
+      <div class="step">
+        <div class="num sans">4</div>
+        <div><h3>Group approval</h3><p>The existing members weigh in on fit.</p></div>
+      </div>
+      <div class="step">
+        <div class="num sans">5</div>
+        <div><h3>Enrollment</h3><p>You're in. First session gets scheduled.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pricing">
+  <div class="wrap">
+    <div class="section-label sans">Investment</div>
+    <h2>Priced like the leadership development it is.</h2>
+    <div class="price-card">
+      <div class="amount sans">$5,000<span> / year</span></div>
+      <div class="alt">or $500/month + $500 one-time enrollment fee</div>
+      <a href="#" class="btn sans">Apply to Join a Peer Group</a>
+    </div>
+  </div>
+</section>
+
+<section class="closing">
+  <div class="wrap">
+    <div class="section-label sans">Seats Are Limited</div>
+    <h2>Groups are small on purpose.</h2>
+    <p>Every group is curated for fit — which means most cycles close before they open publicly.</p>
+    <a href="#apply" class="btn sans">Apply to Join a Peer Group</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <strong>Durable</strong>
+      <div class="sans" style="margin-top:4px">Salt Lake City, UT</div>
+    </div>
+    <nav class="sans" style="display:flex;gap:24px">
+      <a href="#">Membership</a>
+      <a href="#">Peer Groups</a>
+      <a href="#">Events</a>
+      <a href="#">About</a>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
